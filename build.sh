@@ -22,6 +22,32 @@ export OUT_DIR=${ANDROID_BUILD_TOP}/out/msm-${CHIPSET_NAME}-${CHIPSET_NAME}-${TA
 
 export IS_KBUILD=true
 
+# Build Setting
+export GKI_KERNEL_BUILD_OPTIONS="
+    SKIP_MRPROPER=1 \
+    LTO=thin \
+    HERMETIC_TOOLCHAIN=0 \
+    KMI_SYMBOL_LIST_STRICT_MODE=0 \
+    RECOMPILE_KERNEL=1 \
+    ABI_DEFINITION= \
+    BUILD_BOOT_IMG=1 \
+    SKIP_VENDOR_BOOT=1 \
+    MKBOOTIMG_PATH=${ANDROID_BUILD_TOP}/kernel_platform/tools/mkbootimg/mkbootimg.py \
+    KERNEL_BINARY=Image \
+    BOOT_IMAGE_HEADER_VERSION=4 \
+    AVB_SIGN_BOOT_IMG=1 \
+    AVB_BOOT_PARTITION_SIZE=100663296 \
+    AVB_BOOT_KEY=${ANDROID_BUILD_TOP}/kernel_platform/tools/mkbootimg/tests/data/testkey_rsa2048.pem \
+    AVB_BOOT_ALGORITHM=SHA256_RSA2048 \
+    AVB_BOOT_PARTITION_NAME=boot  
+"
+
+# MKBOOTIMG Setting
+export MKBOOTIMG_EXTRA_ARGS="
+    --os_version 12.0.0 \
+    --os_patch_level 2025-12-00 \
+    --pagesize 4096 \
+"
+
 # Cooking Kernel
-cd ./kernel_platform/
-RECOMPILE_KERNEL=1 ./build/android/prepare_vendor.sh ${CHIPSET_NAME} ${TARGET_PRODUCT} gki | tee -a ../build.log
+( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh ${CHIPSET_NAME} ${TARGET_PRODUCT} gki | tee -a ../build.log )
