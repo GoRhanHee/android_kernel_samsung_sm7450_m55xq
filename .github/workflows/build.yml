@@ -28,7 +28,8 @@ jobs:
 
     - name: Setting Scripts Permission
       run: |    
-        chmod +x build.sh            
+        chmod +x build.sh
+        chmod -R +x prebuilts/              
 
     - name: Kernel Build
       run: |   
