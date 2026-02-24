@@ -63,3 +63,7 @@ tar -xf "$TOOLCHAIN_FILE" -C kernel_platform && rm "$TOOLCHAIN_FILE"
 
 # Cooking Kernel
 ( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh ${CHIPSET_NAME} ${TARGET_PRODUCT} gki || exit 1)
+
+# Cooking Flashable File
+cp ./out/msm-${CHIPSET_NAME}-${CHIPSET_NAME}-${TARGET_PRODUCT}/dist/boot.img ./boot.img
+tar -cvf m55xq_Kernel.tar boot.img
