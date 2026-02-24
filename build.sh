@@ -79,7 +79,10 @@ tar -xf "$TOOLCHAIN_FILE" -C kernel_platform && rm "$TOOLCHAIN_FILE"
 ( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh sec ${TARGET_PRODUCT} || exit 1 )
 
 # Copying boot.img
-cp ${ANDROID_BUILD_TOP}/out/msm-${CHIPSET_NAME}-${CHIPSET_NAME}-${TARGET_PRODUCT}/dist/boot.img ./boot.img
+cp ${ANDROID_BUILD_TOP}/out/msm-${CHIPSET_NAME}-${CHIPSET_NAME}-${TARGET_PRODUCT}/dist/boot.img ${ANDROID_BUILD_TOP}/boot.img
+
+# Copy prebuilts modules to LKM Tools
+    cp -a ${ANDROID_BUILD_TOP}/prebuilts/prebuilts/* ${ANDROID_BUILD_TOP}/out/msm-x55-x55-gki/dist/
 
 # Cooking vendor_boot.img
     SCRIPT_DIR="${SCRIPT_DIR}" \
