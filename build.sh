@@ -49,5 +49,13 @@ export MKBOOTIMG_EXTRA_ARGS="
     --pagesize 4096 \
 "
 
+# Import Samsung toolchain
+TOOLCHAIN_URL="https://github.com/GoRhanHee/samsung_sm7450_toolchain/releases/download/toolchain/toolchain.tar.xz"
+TOOLCHAIN_FILE=$(basename "$TOOLCHAIN_URL")
+if [ ! -f "$TOOLCHAIN_FILE" ]; then
+    wget -q --show-progress --progress=dot:giga -O "$TOOLCHAIN_FILE" "$TOOLCHAIN_URL"
+fi
+tar -xf "$TOOLCHAIN_FILE" -C kernel_platform && rm "$TOOLCHAIN_FILE"
+
 # Cooking Kernel
 ( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh ${CHIPSET_NAME} ${TARGET_PRODUCT} gki | tee -a ../build.log )
