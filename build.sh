@@ -3,6 +3,9 @@
 # Import KernelSU-Next with SuSFS
 (cd kernel_platform/common && curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/dev_susfs/kernel/setup.sh" | bash -s dev_susfs)
 
+# DIR Setting
+SCRIPT_DIR="$(dirname $(readlink -fq $0))"
+
 # OEM Setting
 BUILD_TARGET=m55xq_swa_open
 export MODEL=$(echo $BUILD_TARGET | cut -d'_' -f1)
@@ -62,7 +65,7 @@ fi
 tar -xf "$TOOLCHAIN_FILE" -C kernel_platform && rm "$TOOLCHAIN_FILE"
 
 # Cooking Kernel
-( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh ${CHIPSET_NAME} ${TARGET_PRODUCT} ${ANDROID_BUILD_TOP}/out/msm-x55-x55-gki/dist || exit 1 )
+( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh ${CHIPSET_NAME} ${TARGET_PRODUCT} ${ANDROID_BUILD_TOP}/out/msm-x55-x55-gki || exit 1 )
 
 # Copying boot.img
 cp ${ANDROID_BUILD_TOP}/out/msm-${CHIPSET_NAME}-${CHIPSET_NAME}-${TARGET_PRODUCT}/dist/boot.img ./boot.img
