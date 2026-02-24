@@ -15,7 +15,6 @@ export CARRIER=$(echo $BUILD_TARGET | cut -d'_' -f3)
 export TARGET_BUILD_VARIANT=user		
 		
 CHIPSET_NAME=x55
-
 export ANDROID_BUILD_TOP=$(pwd)
 export TARGET_PRODUCT=gki
 export TARGET_BOARD_PLATFORM=gki
@@ -27,7 +26,17 @@ export MERGE_CONFIG="${ANDROID_BUILD_TOP}/kernel_platform/common/scripts/kconfig
 
 mkdir -p "${ANDROID_BUILD_TOP}/out/msm-${CHIPSET_NAME}-${CHIPSET_NAME}-${TARGET_PRODUCT}/dist"
 
-export IS_KBUILD=true
+export KBUILD_EXTRA_SYMBOLS=${ANDROID_BUILD_TOP}/out/vendor/qcom/opensource/mmrm-driver/Module.symvers
+
+export MODNAME=audio_dlkm
+
+export KBUILD_EXT_MODULES="../vendor/qcom/opensource/datarmnet-ext/wlan \
+    ../vendor/qcom/opensource/datarmnet/core \
+    ../vendor/qcom/opensource/mmrm-driver \
+    ../vendor/qcom/opensource/audio-kernel \
+    ../vendor/qcom/opensource/camera-kernel \
+    ../vendor/qcom/opensource/display-drivers/msm \
+    "
 
 # Build Setting
 export GKI_KERNEL_BUILD_OPTIONS="
@@ -65,7 +74,7 @@ fi
 tar -xf "$TOOLCHAIN_FILE" -C kernel_platform && rm "$TOOLCHAIN_FILE"
 
 # Cooking Kernel
-( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh ${CHIPSET_NAME} ${TARGET_PRODUCT} ${ANDROID_BUILD_TOP}/out/msm-x55-x55-gki || exit 1 )
+( env ${GKI_KERNEL_BUILD_OPTIONS} ${ANDROID_BUILD_TOP}/kernel_platform/build/android/prepare_vendor.sh sec ${TARGET_PRODUCT} || exit 1 )
 
 # Copying boot.img
 cp ${ANDROID_BUILD_TOP}/out/msm-${CHIPSET_NAME}-${CHIPSET_NAME}-${TARGET_PRODUCT}/dist/boot.img ./boot.img
