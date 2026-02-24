@@ -35,14 +35,14 @@
 # specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
 
 #<src>                                                 <mnt_point>            <type>  <mnt_flags and options>                            <fs_mgr_flags>
-system	/system	erofs	ro	wait,logical,first_stage_mount,avb=vbmeta_system,avb_keys=/avb
-system	/system	f2fs	ro	wait,logical,first_stage_mount,avb=vbmeta_system,avb_keys=/avb
-system	/system	ext4	ro	wait,logical,first_stage_mount,avb=vbmeta_system,avb_keys=/avb
-system_ext	/system_ext	erofs	ro	wait,logical,first_stage_mount,avb
-product	/product	erofs	ro	wait,logical,first_stage_mount,avb
-vendor	/vendor	erofs	ro	wait,logical,first_stage_mount,avb=vbmeta_system
-vendor_dlkm	/vendor_dlkm	erofs	ro	wait,logical,first_stage_mount,avb
-odm	/odm	erofs	ro	wait,logical,first_stage_mount,avb
+system	/system	erofs	ro	wait,logical,first_stage_mount
+system	/system	f2fs	ro	wait,logical,first_stage_mount
+system	/system	ext4	ro	wait,logical,first_stage_mount
+system_ext	/system_ext	erofs	ro	wait,logical,first_stage_mount
+product	/product	erofs	ro	wait,logical,first_stage_mount
+vendor	/vendor	erofs	ro	wait,logical,first_stage_mount
+vendor_dlkm	/vendor_dlkm	erofs	ro	wait,logical,first_stage_mount
+odm	/odm	erofs	ro	wait,logical,first_stage_mount
 /dev/block/by-name/metadata	/metadata	ext4	noatime,nosuid,nodev,noauto_da_alloc,discard,journal_checksum,data=ordered,errors=panic,sync	wait,check,formattable,wrappedkey,first_stage_mount
 # M55 code for SR-QN6887A-01-220 by zhaoxinagxiang at 20230822 start
 # M55 code for SR-QN6887A-01-347 by Niebingling at 20230901 start
@@ -71,5 +71,5 @@ odm	/odm	erofs	ro	wait,logical,first_stage_mount,avb
 /devices/platform/soc/*.ssusb/*.dwc3/xhci-hcd.*.auto*   auto                   vfat    default                                              voldmanaged=usb:auto
 
 #CSC
-/dev/block/platform/soc/1d84000.ufshc/by-name/prism	/prism	ext4	ro	nofail,first_stage_mount,avb
-/dev/block/platform/soc/1d84000.ufshc/by-name/optics	/optics	ext4	ro	nofail,first_stage_mount,avb
+/dev/block/platform/soc/1d84000.ufshc/by-name/prism	/prism	ext4	ro	nofail,first_stage_mount
+/dev/block/platform/soc/1d84000.ufshc/by-name/optics	/optics	ext4	ro	nofail,first_stage_mount
