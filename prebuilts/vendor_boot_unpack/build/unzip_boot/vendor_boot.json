@@ -1,0 +1,94 @@
+{
+  "info" : {
+    "input" : "/home/test1/m55xq/prebuilts/vendor_boot_unpack/vendor_boot.img",
+    "role" : "vendor_boot.img",
+    "json" : "vendor_boot.json",
+    "headerVersion" : 4,
+    "product" : "SRPWK03A004",
+    "headerSize" : 2128,
+    "pageSize" : 4096,
+    "cmdline" : "video=vfb:640x400,bpp=32,memsize=3072000 bootconfig loop.max_part=7",
+    "tagsLoadAddr" : 31457280,
+    "kernelLoadAddr" : 32768,
+    "imageSize" : 100663296
+  },
+  "ramdisk" : {
+    "file" : "build/unzip_boot/ramdisk.img.lz4",
+    "position" : 4096,
+    "size" : 11522560,
+    "loadAddr" : 33554432,
+    "xzFlags" : null
+  },
+  "dtb" : {
+    "file" : "build/unzip_boot/dtb",
+    "position" : 11530240,
+    "size" : 1317805,
+    "loadAddr" : 32505856,
+    "dtbList" : [ {
+      "seqNo" : 0,
+      "offset" : 0,
+      "header" : {
+        "magic" : 3490578157,
+        "totalsize" : 439216,
+        "offDtStruct" : 56,
+        "offDtStrings" : 398284,
+        "offMemRsvmap" : 40,
+        "version" : 17,
+        "lastCompVersion" : 16,
+        "bootCpuidPhys" : 0,
+        "sizeDtStrings" : 40932,
+        "sizeDtStruct" : 398228
+      }
+    }, {
+      "seqNo" : 1,
+      "offset" : 439216,
+      "header" : {
+        "magic" : 3490578157,
+        "totalsize" : 439349,
+        "offDtStruct" : 56,
+        "offDtStrings" : 398408,
+        "offMemRsvmap" : 40,
+        "version" : 17,
+        "lastCompVersion" : 16,
+        "bootCpuidPhys" : 0,
+        "sizeDtStrings" : 40941,
+        "sizeDtStruct" : 398352
+      }
+    }, {
+      "seqNo" : 2,
+      "offset" : 878565,
+      "header" : {
+        "magic" : 3490578157,
+        "totalsize" : 439240,
+        "offDtStruct" : 56,
+        "offDtStrings" : 398308,
+        "offMemRsvmap" : 40,
+        "version" : 17,
+        "lastCompVersion" : 16,
+        "bootCpuidPhys" : 0,
+        "sizeDtStrings" : 40932,
+        "sizeDtStruct" : 398252
+      }
+    } ]
+  },
+  "ramdisk_table" : {
+    "size" : 108,
+    "eachEntrySize" : 108,
+    "position" : 12849152,
+    "ramdidks" : [ {
+      "size" : 11522560,
+      "offset" : 0,
+      "type" : "PLATFORM",
+      "name" : "",
+      "boardId" : "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+      "boardIdStr" : "",
+      "file" : "build/unzip_boot/ramdisk.1.lz4"
+    } ]
+  },
+  "bootconfig" : {
+    "file" : "build/unzip_boot/bootconfig",
+    "position" : 12853248,
+    "size" : 116,
+    "loadAddr" : 0
+  }
+}
